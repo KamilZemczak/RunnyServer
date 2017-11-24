@@ -96,7 +96,24 @@ public class UserController {
         String email = userToGet.getEmail();
         Integer age = userToGet.getAge();
         String gender = userToGet.getGender();
-        
+        Integer weight = null;
+        Integer height = null;
+        String city = null;
+        String about = null;
+
+        if (userToGet.getWeight() != null) {
+            weight = userToGet.getWeight();
+        }
+        if (userToGet.getHeight() != null) {
+            height = userToGet.getHeight();
+        }
+        if (userToGet.getCity() != null) {
+            city = userToGet.getCity();
+        }
+        if (userToGet.getAbout() != null) {
+            about = userToGet.getAbout();
+        }
+
         userToSet.setId(id);
         userToSet.setName(name);
         userToSet.setSurname(surname);
@@ -104,31 +121,37 @@ public class UserController {
         userToSet.setEmail(email);
         userToSet.setAge(age);
         userToSet.setGender(gender);
+        userToSet.setWeight(weight);
+        userToSet.setHeight(height);
+        userToSet.setCity(city);
+        userToSet.setAbout(about);
 
         return userToSet;
     }
-    
+
     @RequestMapping(value = "/user_update", method = RequestMethod.POST, produces = "application/json")
     public String userUpdate(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-        User userToSet = new User();
-        userToSet = userRepository.findById(userForm.getId());
-            
-        userToSet.setUsername(userForm.getUsername());
-        userToSet.setHeight(userForm.getHeight());
-        userToSet.setWeight(userForm.getWeight());
-        
-        //userValidator.validate(userForm, bindingResult);
-        //Set<Role> roles = new HashSet<>();
-        //roles.add(roleRepository.findOne(1));
-        //userForm.setRoles(roles);
-        userService.update(userToSet);
+        User userToUpdate = new User();
+        userToUpdate = userRepository.findById(userForm.getId());
+        userToUpdate.setUsername(userForm.getUsername());
+        if (userForm.getWeight() != null) {
+            userToUpdate.setWeight(userForm.getWeight());
+        }
 
-        // securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
+        if (userForm.getHeight() != null) {
+            userToUpdate.setHeight(userForm.getHeight());
+        }
+
+        if (userForm.getCity() != null) {
+            userToUpdate.setCity(userForm.getCity());
+        }
+
+        if (userForm.getAbout() != null) {
+            userToUpdate.setAbout(userForm.getAbout());
+        }
+        userService.update(userToUpdate);
         return "";
     }
-    
-    
-
 }
 
 /**

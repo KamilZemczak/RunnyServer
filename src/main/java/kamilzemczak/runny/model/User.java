@@ -40,6 +40,10 @@ public class User implements Serializable {
     private Integer weight;
     @Column
     private Integer height;
+    @Column
+    private String city;
+    @Column
+    private String about;
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
@@ -48,7 +52,7 @@ public class User implements Serializable {
 
     }
 
-    public User(String name, String surname, String username, String email, Integer age, String password, String gender, Integer weight, Integer height) {
+    public User(String name, String surname, String username, String email, Integer age, String password, String gender, Integer weight, Integer height, String city, String about) {
         this.name = name;
         this.surname = surname;
         this.username = username;
@@ -58,6 +62,8 @@ public class User implements Serializable {
         this.gender = gender;
         this.weight = weight;
         this.height = height;
+        this.city = city;
+        this.about = about;
     }
 
     public Integer getId() {
@@ -146,6 +152,22 @@ public class User implements Serializable {
 
     public void setHeight(Integer height) {
         this.height = height;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
     }
 
     public Set<Role> getRoles() {

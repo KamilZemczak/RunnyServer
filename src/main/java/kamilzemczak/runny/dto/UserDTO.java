@@ -21,6 +21,8 @@ public class UserDTO {
     private String password;
     private Integer weight;
     private Integer height;
+    private String city;
+    private String about;
    
     public Integer getId() {
         return id;
@@ -100,5 +102,21 @@ public class UserDTO {
 
     public void setHeight(Integer height) {
         this.height = height;
-    }   
+    }  
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
 }
