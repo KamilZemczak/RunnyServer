@@ -134,6 +134,7 @@ public class UserController {
         User userToUpdate = new User();
         userToUpdate = userRepository.findById(userForm.getId());
         userToUpdate.setUsername(userForm.getUsername());
+        userToUpdate.setAge(userForm.getAge());
         if (userForm.getWeight() != null) {
             userToUpdate.setWeight(userForm.getWeight());
         }
