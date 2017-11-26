@@ -132,7 +132,6 @@ public class UserController {
     @RequestMapping(value = "/user_update", method = RequestMethod.POST, produces = "application/json")
     public String userUpdate(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         User userToUpdate = new User();
-        //test
         userToUpdate = userRepository.findById(userForm.getId());
         userToUpdate.setUsername(userForm.getUsername());
         userToUpdate.setAge(userForm.getAge());
