@@ -9,7 +9,9 @@
  */
 package kamilzemczak.runny.controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +26,10 @@ import kamilzemczak.runny.model.Role;
 import kamilzemczak.runny.model.User;
 import kamilzemczak.runny.service.SecurityService;
 import kamilzemczak.runny.service.UserService;
+import kamilzemczak.runny.service.UserServiceImpl;
 import kamilzemczak.runny.validator.UserValidator;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -44,6 +49,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserServiceImpl userServiceImpl;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -152,6 +160,24 @@ public class UserController {
         }
         userService.update(userToUpdate);
         return "";
+    }
+
+    @RequestMapping(value = "/users_find", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody
+    Set<User> findAll(Model model, User userForm) {
+        Set<User> allUsers = new HashSet<>();
+        Set<User> usersToSend = new HashSet<>();
+        allUsers = userServiceImpl.findAll2();
+
+        for (User user : allUsers) {
+            User userToSend = new User();
+            userToSend.setUsername(user.getUsername());
+            userToSend.setName(user.getName());
+            userToSend.setSurname(user.getSurname());
+            usersToSend.add(userToSend);
+
+        }
+        return usersToSend;
     }
 }
 

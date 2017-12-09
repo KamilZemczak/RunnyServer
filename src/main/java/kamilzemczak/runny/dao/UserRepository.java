@@ -9,6 +9,8 @@
  */
 package kamilzemczak.runny.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import kamilzemczak.runny.model.User;
@@ -21,6 +23,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findByEmail(String email);
     
     User findById(Integer id);
+    
+    /*@Override
+    ArrayList<User> findAll();*/
     
     @Override
     User getOne(Integer id);
