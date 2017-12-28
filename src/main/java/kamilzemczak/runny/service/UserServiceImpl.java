@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
         return users;
     }
     
-     public Set<User> findAll2() {
+    public Set<User> findAll2() {
         Set<User> users = new HashSet<>();
         for (User user : userRepository.findAll()) {
             users.add(user);

@@ -24,9 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RequestMapping("/*")
 public class HomeController {
     
-   
-
-
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     /**

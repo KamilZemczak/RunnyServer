@@ -28,8 +28,6 @@ import kamilzemczak.runny.service.SecurityService;
 import kamilzemczak.runny.service.UserService;
 import kamilzemczak.runny.service.UserServiceImpl;
 import kamilzemczak.runny.validator.UserValidator;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -164,40 +162,27 @@ public class UserController {
 
     @RequestMapping(value = "/users_find", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
-    Set<User> findAll(Model model, User userForm) {
-        Set<User> allUsers = new HashSet<>();
-        Set<User> usersToSend = new HashSet<>();
-        allUsers = userServiceImpl.findAll2();
+    List<User> findAll(Model model, User userForm) {
+        List<User> allUsers = new ArrayList<>();
+        List<User> usersToSend = new ArrayList<>();
+        allUsers = userServiceImpl.findAll();
 
         for (User user : allUsers) {
             User userToSend = new User();
             userToSend.setUsername(user.getUsername());
             userToSend.setName(user.getName());
             userToSend.setSurname(user.getSurname());
+            userToSend.setEmail(user.getEmail());
+            userToSend.setAge(user.getAge());
+            userToSend.setGender(user.getGender());
+            userToSend.setWeight(user.getHeight());
+            userToSend.setHeight(user.getHeight());
+            userToSend.setCity(user.getCity());
+            userToSend.setAbout(user.getAbout());
+
             usersToSend.add(userToSend);
 
         }
         return usersToSend;
     }
 }
-
-/**
- * @RequestMapping(value = "/login", method = RequestMethod.GET, produces =
- * "application/json") public @ResponseBody User login(Model model, String
- * error, String logout, User userForm) {
- * if(userRepository.findByUsername(userForm.getUsername())!=null) {
- * System.out.println(); }
- *
- * if (error != null) { model.addAttribute("error", "Niewłaściwe hasło lub
- * login."); // return "Niewłaściwe hasło lub login."; }
- *
- * if (logout != null) { model.addAttribute("message", "Wylogowanie powiodło
- * sie."); //return "Wylogowanie powiodło się."; }
- *
- * userForm.getAge(); userForm.getEmail(); userForm.getName();
- * userForm.getSurname(); userForm.getGender(); //user.setAge(55); //return
- * user;
- */
-// return userForm;
-//return "Zalogowanie udane.";
-    // }
