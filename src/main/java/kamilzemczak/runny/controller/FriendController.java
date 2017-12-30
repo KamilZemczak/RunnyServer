@@ -45,6 +45,23 @@ public class FriendController {
         return "";
     }
     
+    @RequestMapping(value = "/friend_delete", method = RequestMethod.POST, produces = "application/json")
+    public String deleteFriend(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model, String friendToDelete) {
+        User userToAdd = new User();
+        userToAdd = userRepository.findByUsername(friendToDelete);
+        
+        User userToGet = new User();
+        userToGet = userRepository.findByUsername(userForm.getUsername());
+        
+        if(userToGet.getFriends()!=null) { //TODO: ma już w znajomych gościa
+            userToGet.getFriends().remove(userToAdd);
+        }
+        
+        userService.update(userToGet);
+              
+        return "";
+    }
+    
     @RequestMapping(value = "/friends_find", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
     List<User> findAll(Model model, User userForm) {
