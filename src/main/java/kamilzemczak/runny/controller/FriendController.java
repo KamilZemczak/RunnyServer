@@ -73,6 +73,7 @@ public class FriendController {
 
         for(User friend : friendList) {
             User userToSend = new User();
+            userToSend.setId(friend.getId());
             userToSend.setUsername(friend.getUsername());
             userToSend.setName(friend.getName());
             userToSend.setSurname(friend.getSurname());

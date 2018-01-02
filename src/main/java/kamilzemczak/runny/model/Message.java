@@ -27,7 +27,7 @@ public class Message implements Serializable {
     @JoinColumn(name = "recipient_user_id")
     private User recipient;
     @Column
-    private Date timeSent;
+    private Date time;
     @Column
     private String contents;
     
@@ -39,7 +39,7 @@ public class Message implements Serializable {
         this.author = author;
         this.recipient = recipient;
         this.contents = contents;
-        this.timeSent = new Date();
+        this.time = new Date();
     }
 
     public Integer getId() {
@@ -66,12 +66,12 @@ public class Message implements Serializable {
         this.recipient = recipient;
     }
 
-    public Date getTimeSent() {
-        return timeSent;
+    public Date getTime() {
+        return time;
     }
 
-    public void setTimeSent(Date timeSent) {
-        this.timeSent = timeSent;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public String getContents() {

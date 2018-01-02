@@ -45,9 +45,10 @@ public class User implements Serializable {
     private String city;
     @Column
     private String about;
-    @ManyToMany
+    
+    /*@ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Set<Role> roles;*/
 
     //private ArrayList<User> friends = new ArrayList<User>();
    
@@ -179,13 +180,13 @@ public class User implements Serializable {
         this.about = about;
     }
 
-    public Set<Role> getRoles() {
+    /*public Set<Role> getRoles() {
         return roles;
     }
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
+    }*/
 
     /*public ArrayList<User> getFriends() {
         return friends;

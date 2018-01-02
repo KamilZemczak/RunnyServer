@@ -10,9 +10,7 @@
 package kamilzemczak.runny.controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import kamilzemczak.runny.dao.RoleRepository;
 import kamilzemczak.runny.dao.UserRepository;
-import kamilzemczak.runny.model.Role;
 import kamilzemczak.runny.model.User;
 import kamilzemczak.runny.service.SecurityService;
 import kamilzemczak.runny.service.UserService;
@@ -41,10 +37,7 @@ public class UserController {
 
     @Autowired
     private UserValidator userValidator;
-
-    @Autowired
-    private RoleRepository roleRepository;
-
+    
     @Autowired
     private UserRepository userRepository;
 
@@ -62,9 +55,9 @@ public class UserController {
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
 
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleRepository.findOne(1));
-        userForm.setRoles(roles);
+        //Set<Role> roles = new HashSet<>();
+        //roles.add(roleRepository.findOne(1));
+        //userForm.setRoles(roles);
         userService.save(userForm);
 
         // securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
@@ -169,6 +162,7 @@ public class UserController {
 
         for (User user : allUsers) {
             User userToSend = new User();
+            userToSend.setId(user.getId());
             userToSend.setUsername(user.getUsername());
             userToSend.setName(user.getName());
             userToSend.setSurname(user.getSurname());

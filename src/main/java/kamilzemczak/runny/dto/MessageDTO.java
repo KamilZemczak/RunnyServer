@@ -9,7 +9,7 @@
  */
 package kamilzemczak.runny.dto;
 
-public class messageDTO {
+public class MessageDTO {
 
     private Integer id;
     private String name;

@@ -14,10 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import kamilzemczak.runny.Message;
-import kamilzemczak.runny.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Controller
@@ -35,11 +31,11 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value = "/getmessage", method = RequestMethod.GET, produces = "application/json")
+    /*@RequestMapping(value = "/getmessage", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
     Message getMessage() {
         logger.info("Accessing protected resource");
         return new Message(100, "Congratulations!", "w koncu sie udalo!");
-    }
+    }*/
 
 }

@@ -11,9 +11,13 @@ package kamilzemczak.runny.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import kamilzemczak.runny.dao.MessageRepository;
 import kamilzemczak.runny.dao.UserRepository;
+import kamilzemczak.runny.model.Message;
 import kamilzemczak.runny.model.User;
+import kamilzemczak.runny.service.MessageService;
 import kamilzemczak.runny.service.UserDetailsServiceImpl;
+import kamilzemczak.runny.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +33,15 @@ public class UniqueController {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private MessageRepository messageRepository;
+
+    @Autowired
+    private MessageService messageService;
 
     @RequestMapping(value = "/unique_user", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
@@ -69,4 +82,38 @@ public class UniqueController {
         }
         return uniqueFriend;
     }
+
+    /*@RequestMapping(value = "/message_is_me", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody
+    Boolean message(Model model, User userForm, String recipientUsername, String contents) {
+
+           User author = new User();
+        author = userRepository.findByUsername(userForm.getUsername());
+        
+        User recipient = new User();
+        recipient = userRepository.findByUsername(recipientUsername);
+        
+        Integer authorId = author.getId();
+        Integer recipientId = recipient.getId();
+        
+        List<Message> messages = new ArrayList<>();
+        List<Message> messagesToSend = new ArrayList<>();
+        
+        messages = messageService.findAll();
+        
+        for(Message message : messages) {
+            Integer messageAuthorId = message.getAuthor().getId();
+            Integer messageRecipientId = message.getRecipient().getId();
+            
+            if(messageAuthorId.equals(authorId) && messageRecipientId.equals(recipientId) || messageAuthorId.equals(recipientId) && messageRecipientId.equals(authorId)) {
+                messagesToSend.add(message);
+            }
+            
+        }
+        
+        for(Message message2 : messagesToSend) {
+            
+        }
+        
+    }*/
 }
