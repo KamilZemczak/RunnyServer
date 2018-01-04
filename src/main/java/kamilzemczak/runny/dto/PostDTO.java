@@ -10,15 +10,16 @@
 package kamilzemczak.runny.dto;
 
 import java.util.Date;
+import java.util.List;
 import kamilzemczak.runny.model.User;
 
-public class MessageDTO {
+public class PostDTO {
 
     private Integer id;
     private User author;
-    private User recipient;
     private Date time;
     private String contents;
+    private List<User> comments;
 
     public Integer getId() {
         return id;
@@ -36,14 +37,6 @@ public class MessageDTO {
         this.author = author;
     }
 
-    public User getRecipient() {
-        return recipient;
-    }
-
-    public void setRecipient(User recipient) {
-        this.recipient = recipient;
-    }
-
     public Date getTime() {
         return time;
     }
@@ -58,5 +51,13 @@ public class MessageDTO {
 
     public void setContents(String contents) {
         this.contents = contents;
+    }
+
+    public List<User> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<User> comments) {
+        this.comments = comments;
     }
 }
