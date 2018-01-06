@@ -2,20 +2,19 @@ package kamilzemczak.runny.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "post")
-public class Post implements Serializable {
+@Table(name = "tcomments")
+public class TComment implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,19 +22,21 @@ public class Post implements Serializable {
     @OneToOne
     @JoinColumn(name = "author_user_id")
     private User author;
-    @Column
-    private Date time;
+    @ManyToOne
+    @JoinColumn(name = "training_id", nullable = false)
+    private Training training;
     @Column
     private String contents;
-    @OneToMany(mappedBy = "post")
-    private List<Comment> comments;
+    @Column
+    private Date time;
 
-    public Post() {
+    public TComment() {
 
     }
 
-    public Post(User author, String contents) {
+    public TComment(User author, Training training, String contents) {
         this.author = author;
+        this.training = training;
         this.contents = contents;
         this.time = new Date();
     }
@@ -56,14 +57,14 @@ public class Post implements Serializable {
         this.author = author;
     }
 
-    public Date getTime() {
-        return time;
+    public Training getTraining() {
+        return training;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setTraining(Training training) {
+        this.training = training;
     }
-
+    
     public String getContents() {
         return contents;
     }
@@ -72,11 +73,11 @@ public class Post implements Serializable {
         this.contents = contents;
     }
 
-    public List<Comment> getComments() {
-        return comments;
+    public Date getTime() {
+        return time;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+    public void setTime(Date time) {
+        this.time = time;
     }
 }
