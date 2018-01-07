@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 //.antMatchers("/static/**", "/registration").permitAll()
-                .antMatchers("/static/**", "/registration", "/unique_user", "/unique_email", "/user_details", "/user_update", "/users_find", "/friend_add", "/friends_find", "/is_friend", "/friend_delete", "/message_send", "/messages_find", "/post_send", "/posts_find", "/comment_send", "/comments_find", "/posts_comment_size", "/training_add", "/trainings_find", "/trainings_own_find", "/trainings_comment_size", "/tcomment_send", "/tcomments_find").permitAll()
+                .antMatchers("/static/**", "/registration", "/unique_user", "/unique_email", "/user_details", "/user_update", "/users_find", "/friend_add", "/friends_find", "/is_friend", "/friend_delete", "/message_send", "/messages_find", "/post_send", "/posts_find", "/comment_send", "/comments_find", "/posts_comment_size", "/training_add", "/trainings_find", "/trainings_own_find", "/trainings_comment_size", "/tcomment_send", "/tcomments_find", "/objective_add", "/objectives_find").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
