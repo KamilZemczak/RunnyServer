@@ -29,16 +29,19 @@ public class Objective implements Serializable {
     private String objective;
     @Column
     private Date time;
+    @Column
+    private String executed;
 
     public Objective() {
 
     }
 
-    public Objective(User author, String type, String objective) {
+    public Objective(User author, String type, String objective, String executed) {
         this.author = author;
         this.type = type;
         this.objective = objective;
         this.time = new Date();
+        this.executed = executed;
     }
 
     public Integer getId() {
@@ -80,4 +83,12 @@ public class Objective implements Serializable {
     public void setTime(Date time) {
         this.time = time;
     }
+
+    public String getExecuted() {
+        return executed;
+    }
+
+    public void setExecuted(String executed) {
+        this.executed = executed;
+    } 
 }
