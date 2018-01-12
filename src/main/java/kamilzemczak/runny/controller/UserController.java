@@ -9,8 +9,8 @@
  */
 package kamilzemczak.runny.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,36 +18,33 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import kamilzemczak.runny.dao.UserRepository;
 import kamilzemczak.runny.model.User;
-import kamilzemczak.runny.service.SecurityService;
 import kamilzemczak.runny.service.UserService;
 import kamilzemczak.runny.service.UserServiceImpl;
 import kamilzemczak.runny.validator.UserValidator;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 @Controller
 public class UserController {
-
+    
+    @Autowired
+    private UserRepository userRepository;
+     
     @Autowired
     private UserService userService;
 
     @Autowired
-    private SecurityService securityService;
-
-    @Autowired
-    private UserValidator userValidator;
+    private UserServiceImpl userServiceImpl;
     
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private UserServiceImpl userServiceImpl;
+    private UserValidator userValidator;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
-
         return "registration";
     }
 
@@ -82,7 +79,7 @@ public class UserController {
 
     @RequestMapping(value = "/user_details", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
-    User userDetails(Model model, User userForm) {
+    User userDetails(User userForm) {
         User userToGet = new User();
         User userToSet = new User();
         if (userRepository.findByUsername(userForm.getUsername()) != null) {
@@ -113,70 +110,24 @@ public class UserController {
             about = userToGet.getAbout();
         }
 
-        userToSet.setId(id);
-        userToSet.setName(name);
-        userToSet.setSurname(surname);
-        userToSet.setUsername(username);
-        userToSet.setEmail(email);
-        userToSet.setAge(age);
-        userToSet.setGender(gender);
-        userToSet.setWeight(weight);
-        userToSet.setHeight(height);
-        userToSet.setCity(city);
-        userToSet.setAbout(about);
-
+        userService.setDetails(userToSet, id, name, surname, username, email, age, gender, weight, height, city, about);
         return userToSet;
     }
 
+  
     @RequestMapping(value = "/user_update", method = RequestMethod.POST, produces = "application/json")
-    public String userUpdate(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-        User userToUpdate = new User();
-        userToUpdate = userRepository.findById(userForm.getId());
-        userToUpdate.setUsername(userForm.getUsername());
-        userToUpdate.setAge(userForm.getAge());
-        if (userForm.getWeight() != null) {
-            userToUpdate.setWeight(userForm.getWeight());
-        }
-
-        if (userForm.getHeight() != null) {
-            userToUpdate.setHeight(userForm.getHeight());
-        }
-
-        if (userForm.getCity() != null) {
-            userToUpdate.setCity(userForm.getCity());
-        }
-
-        if (userForm.getAbout() != null) {
-            userToUpdate.setAbout(userForm.getAbout());
-        }
+    public String userUpdate(@ModelAttribute("userForm") User userForm) {
+        User userToUpdate = userRepository.findById(userForm.getId());
+        userService.setUpdateValues(userToUpdate, userForm);
         userService.update(userToUpdate);
         return "";
     }
 
     @RequestMapping(value = "/users_find", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
-    List<User> findAll(Model model, User userForm) {
-        List<User> allUsers = new ArrayList<>();
-        List<User> usersToSend = new ArrayList<>();
-        allUsers = userServiceImpl.findAll();
-
-        for (User user : allUsers) {
-            User userToSend = new User();
-            userToSend.setId(user.getId());
-            userToSend.setUsername(user.getUsername());
-            userToSend.setName(user.getName());
-            userToSend.setSurname(user.getSurname());
-            userToSend.setEmail(user.getEmail());
-            userToSend.setAge(user.getAge());
-            userToSend.setGender(user.getGender());
-            userToSend.setWeight(user.getHeight());
-            userToSend.setHeight(user.getHeight());
-            userToSend.setCity(user.getCity());
-            userToSend.setAbout(user.getAbout());
-
-            usersToSend.add(userToSend);
-
-        }
+    List<User> findAll(User userForm) {
+        List<User> allUsers = userServiceImpl.findAll();
+        List<User> usersToSend = userService.prepareUsersToSend(allUsers);
         return usersToSend;
     }
 }

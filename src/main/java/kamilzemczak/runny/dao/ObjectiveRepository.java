@@ -12,7 +12,6 @@ package kamilzemczak.runny.dao;
 import kamilzemczak.runny.model.Objective;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ObjectiveRepository extends JpaRepository<Objective, Integer> {
-    
+public interface ObjectiveRepository extends JpaRepository<Objective, Integer> {  
    Objective findById(Integer id);
 }

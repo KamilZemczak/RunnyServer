@@ -59,4 +59,9 @@ public class MessageDTO {
     public void setContents(String contents) {
         this.contents = contents;
     }
+
+    @Override
+    public String toString() {
+        return "MessageDTO{" + "id=" + id + ", author=" + author + ", recipient=" + recipient + ", time=" + time + ", contents=" + contents + '}';
+    }
 }

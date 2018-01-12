@@ -9,6 +9,9 @@
  */
 package kamilzemczak.runny.dto;
 
+import java.util.List;
+import kamilzemczak.runny.model.User;
+
 public class UserDTO {
 
     private Integer id;
@@ -23,11 +26,12 @@ public class UserDTO {
     private Integer height;
     private String city;
     private String about;
-   
+    private List<User> friends;
+    
     public Integer getId() {
         return id;
     }
-    
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -47,7 +51,7 @@ public class UserDTO {
     public void setSurname(String surname) {
         this.surname = surname;
     }
-    
+
     public String getUsername() {
         return username;
     }
@@ -71,7 +75,7 @@ public class UserDTO {
     public void setAge(Integer age) {
         this.age = age;
     }
-    
+
     public String getGender() {
         return gender;
     }
@@ -102,7 +106,7 @@ public class UserDTO {
 
     public void setHeight(Integer height) {
         this.height = height;
-    }  
+    }
 
     public String getCity() {
         return city;
@@ -118,5 +122,18 @@ public class UserDTO {
 
     public void setAbout(String about) {
         this.about = about;
+    }
+
+    public List<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
+    }
+    
+    @Override
+    public String toString() {
+        return "UserDTO{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", username=" + username + ", email=" + email + ", age=" + age + ", gender=" + gender + ", password=" + password + ", weight=" + weight + ", height=" + height + ", city=" + city + ", about=" + about + '}';
     }
 }

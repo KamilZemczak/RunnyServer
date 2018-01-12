@@ -12,7 +12,6 @@ package kamilzemczak.runny.model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -45,19 +44,10 @@ public class User implements Serializable {
     private String city;
     @Column
     private String about;
-    
-    /*@ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;*/
-
-    //private ArrayList<User> friends = new ArrayList<User>();
-   
-    //@ElementCollection
     @ManyToMany
     @JoinTable(name = "friends", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "friend_id"))
     private List<User> friends;
 
-    //private Set<CoachGroup> coachGroups = new HashSet<CoachGroup>();
     public User() {
 
     }
@@ -180,22 +170,6 @@ public class User implements Serializable {
         this.about = about;
     }
 
-    /*public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }*/
-
-    /*public ArrayList<User> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(ArrayList<User> friends) {
-        this.friends = friends;
-    }*/
-
     public List<User> getFriends() {
         return friends;
     }
@@ -203,7 +177,4 @@ public class User implements Serializable {
     public void setFriends(List<User> friends) {
         this.friends = friends;
     }
-
-    
-    
 }

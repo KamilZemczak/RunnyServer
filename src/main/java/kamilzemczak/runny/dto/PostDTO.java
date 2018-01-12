@@ -60,4 +60,9 @@ public class PostDTO {
     public void setComments(List<User> comments) {
         this.comments = comments;
     }
+
+    @Override
+    public String toString() {
+        return "PostDTO{" + "id=" + id + ", author=" + author + ", time=" + time + ", contents=" + contents + ", comments=" + comments + '}';
+    }
 }

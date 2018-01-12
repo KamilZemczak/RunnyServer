@@ -30,10 +30,10 @@ public class Message implements Serializable {
     private Date time;
     @Column
     private String contents;
-    
+
     public Message() {
 
-    }  
+    }
 
     public Message(User author, User recipient, String contents) {
         this.author = author;
@@ -81,6 +81,4 @@ public class Message implements Serializable {
     public void setContents(String contents) {
         this.contents = contents;
     }
-    
-    
 }
