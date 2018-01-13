@@ -59,4 +59,21 @@ public class CommentController {
         commentService.find(allComments, postId, commentsToSend);
         return commentsToSend;
     }
+    
+    @RequestMapping(value = "/comment_update", method = RequestMethod.POST, produces = "application/json")
+    public String update(String sCommentId, String content) {
+        Integer commentId = Integer.valueOf(sCommentId);
+        Comment comment = commentRepository.findById(commentId);
+        comment.setContents(content);
+        commentService.update(comment);
+        return "";
+    }
+
+    @RequestMapping(value = "/comment_delete", method = RequestMethod.POST, produces = "application/json")
+    public String delete(String sCommentId) {
+        Integer commentId = Integer.valueOf(sCommentId);
+        Comment comment = commentRepository.findById(commentId);
+        commentRepository.delete(comment);
+        return "";
+    }
 }

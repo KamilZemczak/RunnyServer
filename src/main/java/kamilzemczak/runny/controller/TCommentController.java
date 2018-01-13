@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kamilzemczak.runny.dao.TCommentRepository;
 import kamilzemczak.runny.dao.TrainingRepository;
 import kamilzemczak.runny.dao.UserRepository;
+import kamilzemczak.runny.model.Comment;
 import kamilzemczak.runny.model.TComment;
 import kamilzemczak.runny.model.Training;
 import kamilzemczak.runny.model.User;
@@ -58,5 +59,21 @@ public class TCommentController {
         List<TComment> trainingsToSend = tCommentService.find(allTrainingComments, trainingId);
         return trainingsToSend;
     }
+    
+    @RequestMapping(value = "/tcomment_update", method = RequestMethod.POST, produces = "application/json")
+    public String update(String sCommentId, String content) {
+        Integer commentId = Integer.valueOf(sCommentId);
+        TComment tComment = tCommentRepository.findById(commentId);
+        tComment.setContents(content);
+        tCommentService.update(tComment);
+        return "";
+    }
 
+    @RequestMapping(value = "/tcomment_delete", method = RequestMethod.POST, produces = "application/json")
+    public String delete(String sCommentId) {
+        Integer commentId = Integer.valueOf(sCommentId);
+        TComment tComment = tCommentRepository.findById(commentId);
+        tCommentRepository.delete(tComment);
+        return "";
+    }
 }

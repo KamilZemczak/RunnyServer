@@ -11,6 +11,7 @@ package kamilzemczak.runny.dto;
 
 import java.util.Date;
 import java.util.List;
+import kamilzemczak.runny.model.PostLike;
 import kamilzemczak.runny.model.User;
 
 public class PostDTO {
@@ -20,6 +21,8 @@ public class PostDTO {
     private Date time;
     private String contents;
     private List<User> comments;
+    private List<PostLike> likes;
+
 
     public Integer getId() {
         return id;
@@ -61,8 +64,16 @@ public class PostDTO {
         this.comments = comments;
     }
 
+    public List<PostLike> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<PostLike> likes) {
+        this.likes = likes;
+    }
+
     @Override
     public String toString() {
-        return "PostDTO{" + "id=" + id + ", author=" + author + ", time=" + time + ", contents=" + contents + ", comments=" + comments + '}';
+        return "PostDTO{" + "id=" + id + ", author=" + author + ", time=" + time + ", contents=" + contents + ", comments=" + comments + ", likes=" + likes + '}';
     }
 }

@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -29,7 +31,7 @@ public class Post implements Serializable {
     private String contents;
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
-
+    
     public Post() {
 
     }

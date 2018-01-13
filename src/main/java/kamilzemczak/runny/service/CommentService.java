@@ -70,4 +70,22 @@ public class CommentService {
         }
         return commentNumber;
     }
+    
+    public void deleteCommentWithPost(List<Comment> comments, Integer postId) {
+        for(Comment comment : comments) {
+            if(comment.getPost().getId().equals(postId)) {
+                commentRepository.delete(comment.getId());
+            }
+        }
+    }
+    
+    /*public PostLike setLikeToPost(Post post, User currentUser) {
+        List<PostLike> likes = new ArrayList<>();
+        PostLike like = new PostLike();
+        like.setPost(post);
+        like.setUser(currentUser);
+        likes.add(like);
+        post.setLikes(likes);
+        return like;
+    }*/
 }

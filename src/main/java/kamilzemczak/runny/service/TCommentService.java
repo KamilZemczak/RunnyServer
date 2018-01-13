@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kamilzemczak.runny.dao.TCommentRepository;
+import kamilzemczak.runny.model.Comment;
 import kamilzemczak.runny.model.TComment;
 import kamilzemczak.runny.model.Training;
 import kamilzemczak.runny.model.User;
@@ -72,5 +73,13 @@ public class TCommentService {
             tComment.getTraining().getTcomments().clear();
         }
         return trainingsToSend;
+    }
+
+    public void deleteCommentWithTraining(List<TComment> tComments, Integer trainingId) {
+        for (TComment tComment : tComments) {
+            if (tComment.getTraining().getId().equals(trainingId)) {
+                tCommentRepository.delete(tComment.getId());
+            }
+        }
     }
 }

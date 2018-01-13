@@ -70,14 +70,23 @@ public class ObjectiveService {
 
     public void updateObjective(List<Objective> userObjectives, List<Training> userTrainings) throws NumberFormatException {
         for (Objective objective2 : userObjectives) {
-            for (Training training2 : userTrainings) {
-                if (objective2.getExecuted().equals("N")) {
+            if (objective2.getExecuted().equals("N")) {
+                for (Training training2 : userTrainings) {
                     String objective = objective2.getObjective();
-                    String objectiveToProcess = objective.replace("km", "");
-                    Integer objectivei = Integer.valueOf(objectiveToProcess);
-                    if (objectivei <= training2.getDistance() && training2.getTime().after(objective2.getTime())) {
-                        objective2.setExecuted("Y");
-                        objectiveService.update(objective2);
+                    if (objective.endsWith("km")) {
+                        String objectiveToProcess = objective.replace("km", "");
+                        Integer objectivei = Integer.valueOf(objectiveToProcess);
+                        if (objectivei <= training2.getDistance() && training2.getTime().after(objective2.getTime())) {
+                            objective2.setExecuted("Y");
+                            objectiveService.update(objective2);
+                        }
+                    } else if (objective.endsWith("kcal")) {
+                        String objectiveToProcess = objective.replace("kcal", "");
+                        Integer objectivei = Integer.valueOf(objectiveToProcess);
+                        if (objectivei <= training2.getCalories() && training2.getTime().after(objective2.getTime())) {
+                            objective2.setExecuted("Y");
+                            objectiveService.update(objective2);
+                        }
                     }
                 }
             }

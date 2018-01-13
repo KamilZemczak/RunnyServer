@@ -9,7 +9,6 @@
  */
 package kamilzemczak.runny.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kamilzemczak.runny.dao.MessageRepository;
+import kamilzemczak.runny.dao.PostRepository;
 import kamilzemczak.runny.dao.UserRepository;
+import kamilzemczak.runny.model.Post;
 import kamilzemczak.runny.model.User;
 import kamilzemczak.runny.service.MessageService;
 import kamilzemczak.runny.service.UserDetailsServiceImpl;
 import kamilzemczak.runny.service.UserService;
-
 
 @Controller
 public class UniqueController {
@@ -43,6 +43,9 @@ public class UniqueController {
 
     @Autowired
     private MessageService messageService;
+
+    @Autowired
+    private PostRepository postRepository;
 
     @RequestMapping(value = "/unique_user", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody

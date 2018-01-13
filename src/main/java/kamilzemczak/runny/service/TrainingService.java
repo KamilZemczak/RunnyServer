@@ -51,6 +51,12 @@ public class TrainingService {
 
     public Training create(User author, Integer distance, String hours, String mins, Integer duration, Integer iCalories, String notes) {
         Training training = new Training();
+        if (hours.isEmpty()) {
+            hours = "0";
+        }
+        if (mins.isEmpty()) {
+            mins = "00";
+        }
         String contents = null;
         if (author.getGender().equals("M")) {
             contents = author.getName() + " " + author.getSurname() + " " + "przebiegł" + " " + distance + "km" + " " + "w" + " " + hours + "g" + ":" + mins + "m.";
@@ -66,6 +72,29 @@ public class TrainingService {
             training.setNotes(notes);
         }
         return training;
+    }
+
+    public void updateValues(User author, Integer distance, String hours, String mins, Training training, Integer duration, Integer iCalories, String notes) {
+        String contents = null;
+        if (hours.isEmpty()) {
+            hours = "0";
+        }
+        if (mins.isEmpty()) {
+            mins = "00";
+        }
+        if (author.getGender().equals("M")) {
+            contents = author.getName() + " " + author.getSurname() + " " + "przebiegł" + " " + distance + "km" + " " + "w" + " " + hours + "g" + ":" + mins + "m.";
+        } else if (author.getGender().equals("F")) {
+            contents = author.getName() + " " + author.getSurname() + " " + "przebiegła" + " " + distance + "km" + " " + "w" + " " + hours + "g" + ":" + mins + "m.";
+        }
+        training.setAuthor(author);
+        training.setDuration(duration);
+        training.setDistance(distance);
+        training.setCalories(iCalories);
+        training.setContents(contents);
+        if (!notes.isEmpty()) {
+            training.setNotes(notes);
+        }
     }
 
     public List<Training> find(List<Training> trainings, boolean flag, List<Integer> userFriendsId, User currentUser) {

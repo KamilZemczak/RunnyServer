@@ -10,6 +10,7 @@
 package kamilzemczak.runny.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -172,5 +173,31 @@ public class UserServiceImpl implements UserService {
             usersToSend.add(userToSend);
         }
         return usersToSend;
+    }
+
+    public List<User> excludeFriendsAndYourself(List<User> prepareList, User currentUser, List<Integer> userFriendsId) {
+        List<User> listAfterProcessing = new ArrayList<>();
+        List<User> usersToDel = new ArrayList<>();
+        for (User user : prepareList) {
+            if (!user.getId().equals(currentUser.getId())) {
+                listAfterProcessing.add(user);
+            }
+        }
+        int[] ids = convertIntegers(userFriendsId);
+        for (User user2 : listAfterProcessing) {
+            if (userFriendsId.contains(user2.getId())) {
+                usersToDel.add(user2);
+            }
+        }    
+        listAfterProcessing.removeAll(usersToDel);
+        return listAfterProcessing;
+    }
+
+    public static int[] convertIntegers(List<Integer> integers) {
+        int[] ret = new int[integers.size()];
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] = integers.get(i).intValue();
+        }
+        return ret;
     }
 }

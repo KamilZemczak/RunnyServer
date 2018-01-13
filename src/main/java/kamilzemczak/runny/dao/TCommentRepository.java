@@ -9,10 +9,9 @@
  */
 package kamilzemczak.runny.dao;
 
-import kamilzemczak.runny.model.Comment;
 import kamilzemczak.runny.model.TComment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TCommentRepository extends JpaRepository<TComment, Integer> {
-    Comment findById(Integer id);
+    TComment findById(Integer id);
 }

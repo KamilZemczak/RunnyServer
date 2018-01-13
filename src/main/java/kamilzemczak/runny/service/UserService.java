@@ -27,10 +27,14 @@ public interface UserService {
     void setDetails(User userToSet, Integer id, String name, String surname, String username, String email, Integer age, String gender, Integer weight, Integer height, String city, String about);
 
     List<User> prepareFriendsList(User currentUser);
+    
+    List<User> excludeFriendsAndYourself(List<User> prepareList, User currentUser, List<Integer> userFriendsId);
 
     List<Integer> getUserFriendsId(User currentUser);
 
     List<User> prepareUsersToSend(List<User> allUsers);
 
     User findByUsername(String username);
+
+    
 }

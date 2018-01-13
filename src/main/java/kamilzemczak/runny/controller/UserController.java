@@ -9,6 +9,7 @@
  */
 package kamilzemczak.runny.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,8 +127,11 @@ public class UserController {
     @RequestMapping(value = "/users_find", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
     List<User> findAll(User userForm) {
+        User currentUser = userRepository.findByUsername(userForm.getUsername());
         List<User> allUsers = userServiceImpl.findAll();
-        List<User> usersToSend = userService.prepareUsersToSend(allUsers);
+        List<User> prepareList = userService.prepareUsersToSend(allUsers);
+        List<Integer> userFriendsId = userService.getUserFriendsId(currentUser);
+        List<User> usersToSend = userService.excludeFriendsAndYourself(prepareList, currentUser, userFriendsId);
         return usersToSend;
     }
 }
