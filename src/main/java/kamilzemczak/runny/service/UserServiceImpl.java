@@ -10,7 +10,6 @@
 package kamilzemczak.runny.service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +38,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(User user) {
+        userRepository.save(user);
+    }
+    
+    @Override
+    public void updatePassword(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 

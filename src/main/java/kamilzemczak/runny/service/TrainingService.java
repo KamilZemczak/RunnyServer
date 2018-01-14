@@ -133,11 +133,9 @@ public class TrainingService {
 
     public List<Integer> getCommentSize(List<Training> trainingsToSend) {
         List<Integer> commentNumber = new ArrayList<>();
-        for (Training trainings2 : trainingsToSend) {
-            trainings2.getAuthor().getFriends().clear();
-            if (trainings2.getTcomments() != null) {
-                commentNumber.add(trainings2.getTcomments().size());
-                trainings2.getTcomments().clear();
+        for (Training training : trainingsToSend) {
+            if (training.getTcomments() != null) {
+                commentNumber.add(training.getTcomments().size());
             }
         }
         return commentNumber;

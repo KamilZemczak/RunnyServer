@@ -63,4 +63,13 @@ public class ObjectiveController {
         objectiveService.updateObjective(userObjectives, userTrainings);
         return "";
     }
+    
+    @RequestMapping(value = "/objective_delete", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody
+    String update(String sObjectiveId) {
+        Integer objectiveId = Integer.valueOf(sObjectiveId);
+        Objective objective = objectiveRepository.findById(objectiveId);
+        objectiveRepository.delete(objective);
+        return "";
+    }
 }

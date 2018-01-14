@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 //.antMatchers("/static/**", "/registration").permitAll()
-                .antMatchers("/static/**", "/registration", "/unique_user", "/unique_email", "/user_details", "/user_update", "/users_find", "/friend_add", "/friends_find", "/is_friend", "/friend_delete", "/message_send", "/messages_find", "/post_send", "/post_update", "/post_delete", "/posts_find", "/post_like", "/comment_send", "/comments_find", "/comment_update", "/comment_delete", "/posts_comment_size", "/training_add", "/trainings_find", "/trainings_own_find", "/trainings_comment_size", "/training_update", "/training_delete", "/tcomment_send", "/tcomments_find", "/tcomment_update", "/tcomment_delete", "/objective_add", "/objectives_find",  "/objective_update").permitAll()
+                .antMatchers("/static/**", "/registration", "/unique_user", "/unique_email", "/user_details", "/user_update", "/users_find", "/user_password_update",  "/friend_add", "/friends_find", "/is_friend", "/friend_delete", "/message_send", "/messages_find", "/post_send", "/post_update", "/post_delete", "/posts_find", "/post_like", "/comment_send", "/comments_find", "/comment_update", "/comment_delete", "/posts_comment_size", "/training_add", "/trainings_find", "/trainings_own_find", "/trainings_comment_size", "/training_update", "/training_delete", "/tcomment_send", "/tcomments_find", "/tcomment_update", "/tcomment_delete", "/objective_add", "/objectives_find",  "/objective_update", "/objective_delete").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

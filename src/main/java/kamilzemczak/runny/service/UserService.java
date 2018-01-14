@@ -24,10 +24,12 @@ public interface UserService {
 
     void setUpdateValues(User userToUpdate, User userForm);
 
+    void updatePassword(User currentUser);
+
     void setDetails(User userToSet, Integer id, String name, String surname, String username, String email, Integer age, String gender, Integer weight, Integer height, String city, String about);
 
     List<User> prepareFriendsList(User currentUser);
-    
+
     List<User> excludeFriendsAndYourself(List<User> prepareList, User currentUser, List<Integer> userFriendsId);
 
     List<Integer> getUserFriendsId(User currentUser);
@@ -35,6 +37,4 @@ public interface UserService {
     List<User> prepareUsersToSend(List<User> allUsers);
 
     User findByUsername(String username);
-
-    
 }

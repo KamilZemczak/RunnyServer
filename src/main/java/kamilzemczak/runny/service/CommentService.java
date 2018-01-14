@@ -61,24 +61,22 @@ public class CommentService {
 
     public List<Integer> getCommentSize(List<Post> postsToSend) {
         List<Integer> commentNumber = new ArrayList<>();
-        for (Post posts2 : postsToSend) {
-            posts2.getAuthor().getFriends().clear();
-            if (posts2.getComments() != null) {
-                commentNumber.add(posts2.getComments().size());
-                posts2.getComments().clear();
+        for (Post posts : postsToSend) {
+            if (posts.getComments() != null) {
+                commentNumber.add(posts.getComments().size());
             }
         }
         return commentNumber;
     }
-    
+
     public void deleteCommentWithPost(List<Comment> comments, Integer postId) {
-        for(Comment comment : comments) {
-            if(comment.getPost().getId().equals(postId)) {
+        for (Comment comment : comments) {
+            if (comment.getPost().getId().equals(postId)) {
                 commentRepository.delete(comment.getId());
             }
         }
     }
-    
+
     /*public PostLike setLikeToPost(Post post, User currentUser) {
         List<PostLike> likes = new ArrayList<>();
         PostLike like = new PostLike();

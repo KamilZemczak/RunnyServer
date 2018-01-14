@@ -27,19 +27,18 @@ import kamilzemczak.runny.service.UserService;
 import kamilzemczak.runny.service.UserServiceImpl;
 import kamilzemczak.runny.validator.UserValidator;
 
-
 @Controller
 public class UserController {
-    
+
     @Autowired
     private UserRepository userRepository;
-     
+
     @Autowired
     private UserService userService;
 
     @Autowired
     private UserServiceImpl userServiceImpl;
-    
+
     @Autowired
     private UserValidator userValidator;
 
@@ -115,7 +114,6 @@ public class UserController {
         return userToSet;
     }
 
-  
     @RequestMapping(value = "/user_update", method = RequestMethod.POST, produces = "application/json")
     public String userUpdate(@ModelAttribute("userForm") User userForm) {
         User userToUpdate = userRepository.findById(userForm.getId());
@@ -133,5 +131,15 @@ public class UserController {
         List<Integer> userFriendsId = userService.getUserFriendsId(currentUser);
         List<User> usersToSend = userService.excludeFriendsAndYourself(prepareList, currentUser, userFriendsId);
         return usersToSend;
+    }
+
+    @RequestMapping(value = "/user_password_update", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody
+    String passwordUpdate(User userForm) {
+        User currentUser = userRepository.findByUsername(userForm.getUsername());
+        currentUser.setPassword(userForm.getPassword());
+        currentUser.setPasswordConfirm(userForm.getPasswordConfirm());
+        userService.updatePassword(currentUser);
+        return "";
     }
 }
