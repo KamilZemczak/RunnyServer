@@ -51,13 +51,7 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST, produces = "application/json")
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
-
-        //Set<Role> roles = new HashSet<>();
-        //roles.add(roleRepository.findOne(1));
-        //userForm.setRoles(roles);
         userService.save(userForm);
-
-        // securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
         return "";
     }
 
