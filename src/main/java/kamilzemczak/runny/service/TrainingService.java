@@ -68,8 +68,10 @@ public class TrainingService {
         training.setDistance(distance);
         training.setCalories(iCalories);
         training.setContents(contents);
-        if (!notes.isEmpty()) {
-            training.setNotes(notes);
+        if (notes != null) {
+            if (!notes.isEmpty()) {
+                training.setNotes(notes);
+            }
         }
         return training;
     }

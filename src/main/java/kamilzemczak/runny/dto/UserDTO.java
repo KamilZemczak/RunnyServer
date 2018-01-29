@@ -27,6 +27,24 @@ public class UserDTO {
     private String city;
     private String about;
     private List<User> friends;
+
+    public UserDTO(Integer id, String name, String surname, String username, String email, Integer age, String gender, String password, Integer weight, Integer height, String city, String about, List<User> friends) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.username = username;
+        this.email = email;
+        this.age = age;
+        this.gender = gender;
+        this.password = password;
+        this.weight = weight;
+        this.height = height;
+        this.city = city;
+        this.about = about;
+        this.friends = friends;
+    }
+    
+    
     
     public Integer getId() {
         return id;

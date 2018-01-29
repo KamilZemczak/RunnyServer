@@ -31,6 +31,9 @@ public class PostService {
     public Post create(User author, String contents) {
         Post post = new Post();
         post.setAuthor(author);
+        if (contents==null) {
+            throw new NullPointerException("Treść nie może być pusta.");
+        }
         post.setContents(contents);
         return post;
     }

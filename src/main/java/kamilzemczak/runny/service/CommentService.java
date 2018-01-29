@@ -31,6 +31,9 @@ public class CommentService {
 
     public Comment create(User author, String contents, Post postToModify, List<Comment> comments) {
         Comment comment = new Comment();
+        if (author == null) {
+            throw new NullPointerException("Brak użytkownika.");
+        }
         comment.setAuthor(author);
         comment.setContents(contents);
         comment.setPost(postToModify);

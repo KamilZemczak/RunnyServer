@@ -69,23 +69,23 @@ public class ObjectiveService {
     }
 
     public void updateObjective(List<Objective> userObjectives, List<Training> userTrainings) throws NumberFormatException {
-        for (Objective objective2 : userObjectives) {
-            if (objective2.getExecuted().equals("N")) {
-                for (Training training2 : userTrainings) {
-                    String objective = objective2.getObjective();
-                    if (objective.endsWith("km")) {
-                        String objectiveToProcess = objective.replace("km", "");
+        for (Objective objective : userObjectives) {
+            if (objective.getExecuted().equals("N")) {
+                for (Training training : userTrainings) {
+                    String nameOfObjective = objective.getObjective();
+                    if (nameOfObjective.endsWith("km")) {
+                        String objectiveToProcess = nameOfObjective.replace("km", "");
                         Integer objectivei = Integer.valueOf(objectiveToProcess);
-                        if (objectivei <= training2.getDistance() && training2.getTime().after(objective2.getTime())) {
-                            objective2.setExecuted("Y");
-                            objectiveService.update(objective2);
+                        if (objectivei <= training.getDistance() && training.getTime().after(objective.getTime())) {
+                            objective.setExecuted("Y");
+                            objectiveService.update(objective);
                         }
-                    } else if (objective.endsWith("kcal")) {
-                        String objectiveToProcess = objective.replace("kcal", "");
+                    } else if (nameOfObjective.endsWith("kcal")) {
+                        String objectiveToProcess = nameOfObjective.replace("kcal", "");
                         Integer objectivei = Integer.valueOf(objectiveToProcess);
-                        if (objectivei <= training2.getCalories() && training2.getTime().after(objective2.getTime())) {
-                            objective2.setExecuted("Y");
-                            objectiveService.update(objective2);
+                        if (objectivei <= training.getCalories() && training.getTime().after(objective.getTime())) {
+                            objective.setExecuted("Y");
+                            objectiveService.update(objective);
                         }
                     }
                 }

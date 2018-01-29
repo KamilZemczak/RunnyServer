@@ -45,6 +45,7 @@ public class MessageService {
     public void clear(List<Message> messagesToSend) {
         for (Message messages : messagesToSend) {
             messages.getAuthor().getFriends().clear();
+            messages.getRecipient().getFriends().clear();
         }
     }
 }

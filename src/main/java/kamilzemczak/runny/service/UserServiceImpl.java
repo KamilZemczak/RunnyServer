@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     public void update(User user) {
         userRepository.save(user);
     }
-    
+
     @Override
     public void updatePassword(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -188,12 +188,11 @@ public class UserServiceImpl implements UserService {
                 listAfterProcessing.add(user);
             }
         }
-        int[] ids = convertIntegers(userFriendsId);
         for (User user2 : listAfterProcessing) {
             if (userFriendsId.contains(user2.getId())) {
                 usersToDel.add(user2);
             }
-        }    
+        }
         listAfterProcessing.removeAll(usersToDel);
         return listAfterProcessing;
     }
@@ -204,5 +203,21 @@ public class UserServiceImpl implements UserService {
             ret[i] = integers.get(i).intValue();
         }
         return ret;
+    }
+
+    public User createNew(final User user) {
+        final User result = new User();
+        result.setUsername(user.getUsername());
+        result.setName(user.getName());
+        result.setSurname(user.getSurname());
+        result.setEmail(user.getEmail());
+        result.setAge(user.getAge());
+        result.setGender(user.getGender());
+        result.setWeight(user.getWeight());
+        result.setHeight(user.getHeight());
+        result.setCity(user.getCity());
+        result.setAbout(user.getAbout());
+      
+        return result;
     }
 }
